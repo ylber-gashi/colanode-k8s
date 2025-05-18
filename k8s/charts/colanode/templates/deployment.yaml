@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "colanode.fullname" . }}
+  labels:
+    {{- include "colanode.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.colanode.autoscaling.enabled }}
+  replicas: {{ .Values.colanode.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "colanode.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.colanode.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "colanode.selectorLabels" . | nindent 8 }}
+        {{- with .Values.colanode.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.colanode.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "colanode.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.colanode.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.colanode.securityContext | nindent 12 }}
+          image: "{{ .Values.colanode.image.repository }}:{{ .Values.colanode.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.colanode.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.colanode.service.port }}
+              protocol: TCP
+          env:
+            {{- include "colanode.serverEnvVars" . | nindent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.colanode.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.colanode.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.colanode.resources | nindent 12 }}
+          {{- with .Values.colanode.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.colanode.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.colanode.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.colanode.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.colanode.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
