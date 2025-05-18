@@ -228,8 +228,11 @@ postgresql:
   # -- Enable PostgreSQL deployment (dependency chart)
   enabled: true
   image:
-    repository: pgvector/pgvector
-    tag: pg17
+    registry: ghcr.io
+    repository: ylber-gashi/postgres-pgvector
+    tag: "17"
+    pullPolicy: Always
+
   auth:
     username: colanode_user
     # -- PostgreSQL password. Can be provided directly or via existingSecret.

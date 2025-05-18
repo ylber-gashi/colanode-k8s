@@ -1,0 +1,28 @@
+name: build-postgres-pgvector
+on:
+  push:
+    paths:
+      - "k8s/postgres-pgvector/**"
+      - ".github/workflows/build-postgres.yml"
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build & push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./k8s/postgres-pgvector
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/postgres-pgvector:17
