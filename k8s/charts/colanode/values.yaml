@@ -240,7 +240,7 @@ postgresql:
   auth:
     username: colanode_user
     # -- PostgreSQL password. Can be provided directly or via existingSecret.
-    password: ""
+    password: "ylber123"
     database: colanode_db
     # -- Name of the existing Kubernetes secret containing the PostgreSQL password
     existingSecret: ""
@@ -264,7 +264,7 @@ valkey:
   auth:
     enabled: true
     # -- Valkey password. Can be provided directly or via existingSecret.
-    password: ""
+    password: "ylber123"
     # -- Name of the existing Kubernetes secret containing the Valkey password
     existingSecret: ""
     # -- Key within the existing secret that holds the password
