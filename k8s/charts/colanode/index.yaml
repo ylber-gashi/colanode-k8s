@@ -3,7 +3,32 @@ entries:
   colanode:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-05-19T21:23:01.13001+02:00"
+    created: "2025-05-19T21:26:50.512821+02:00"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.7.4
+    - alias: redis
+      condition: valkey.enabled
+      name: valkey
+      repository: https://charts.bitnami.com/bitnami
+      version: 3.0.4
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.0.10
+    description: A Helm chart for Colanode - open-source & local-first collaboration
+      workspace
+    digest: 0bdec841989b985f30d4794b99413f239c9f50653eea884d38b23c1675622708
+    name: colanode
+    type: application
+    urls:
+    - colanode-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-05-19T21:26:50.502296+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -28,7 +53,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-05-19T21:23:01.120032+02:00"
+    created: "2025-05-19T21:26:50.492151+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -65,7 +90,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 2025.4.22
-    created: "2025-05-19T21:23:01.13212+02:00"
+    created: "2025-05-19T21:26:50.514603+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -107,7 +132,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 17.5.0
-    created: "2025-05-19T21:23:01.134925+02:00"
+    created: "2025-05-19T21:26:50.517578+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -154,7 +179,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 8.1.1
-    created: "2025-05-19T21:23:01.138078+02:00"
+    created: "2025-05-19T21:26:50.520303+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -180,4 +205,4 @@ entries:
     urls:
     - charts/valkey-3.0.4.tgz
     version: 3.0.4
-generated: "2025-05-19T21:23:01.108563+02:00"
+generated: "2025-05-19T21:26:50.480508+02:00"
