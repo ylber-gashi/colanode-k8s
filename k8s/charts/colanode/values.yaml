@@ -223,6 +223,10 @@ colanode:
     # ───────────────────────────────────────────────────────────────
     AI_ENABLED: "false"
 
+global:
+  security:
+    allowInsecureImages: true
+
 # PostgreSQL Dependency Configuration
 postgresql:
   # -- Enable PostgreSQL deployment (dependency chart)
