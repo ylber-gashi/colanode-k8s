@@ -271,6 +271,7 @@ valkey:
   architecture: standalone
   auth:
     enabled: true
+    username: default
     # -- Valkey password. Can be provided directly or via existingSecret.
     password: "ylber123"
     # -- Name of the existing Kubernetes secret containing the Valkey password
@@ -282,6 +283,10 @@ valkey:
     persistence:
       enabled: true
       size: 8Gi
+    command:
+      - "valkey-server"
+      - "--requirepass"
+      - "ylber123"
 
 # MinIO Dependency Configuration
 minio:
