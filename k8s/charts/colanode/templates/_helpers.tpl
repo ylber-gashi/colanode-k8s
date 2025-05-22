@@ -72,7 +72,7 @@ Return the PostgreSQL hostname
 Return the Valkey hostname
 */}}
 {{- define "colanode.valkey.hostname" -}}
-{{- printf "%s-valkey-master" .Release.Name -}}
+{{- printf "%s-redis-master" .Release.Name -}}
 {{- end }}
 
 {{/*
