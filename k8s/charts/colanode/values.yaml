@@ -282,17 +282,6 @@ valkey:
     persistence:
       enabled: true
       size: 8Gi
-    # Bitnami Valkey chart requires command override when setting password this way
-    command:
-      - "valkey-server"
-      - "--requirepass"
-      - "$(REDIS_PASSWORD)"
-    extraEnvVars:
-      - name: REDIS_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: "{{ .Release.Name }}-redis"
-            key: "redis-password"
 
 # MinIO Dependency Configuration
 minio:

@@ -181,7 +181,7 @@ Colanode Server Environment Variables
 {{- if .Values.valkey.auth.enabled }}
   {{- if or .Values.valkey.auth.password .Values.valkey.auth.existingSecret }}
 - name: REDIS_PASSWORD
-    {{- include "colanode.getRequiredValueOrSecret" (dict "key" "valkey.auth.password" "value" (dict "value" .Values.valkey.auth.password "existingSecret" .Values.valkey.auth.existingSecret "secretKey" .Values.valkey.auth.secretKeys.redisPasswordKey )) | nindent 2 }}
+  {{- include "colanode.getRequiredValueOrSecret" (dict "key" "valkey.auth.password" "value" (dict "value" .Values.valkey.auth.password "existingSecret" .Values.valkey.auth.existingSecret "secretKey" .Values.valkey.auth.secretKeys.redisPasswordKey )) | nindent 2 }}
   {{- else }}
     {{ fail "valkey.auth.password or valkey.auth.existingSecret must be set when valkey.auth.enabled is true" }}
   {{- end }}
