@@ -111,6 +111,17 @@ colanode:
     failureThreshold: 3
     successThreshold: 1
 
+  # -- Startup probe configuration - waits for dependencies to be ready
+  startupProbe:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 12
+    successThreshold: 1
+
   autoscaling:
     # -- Enable Horizontal Pod Autoscaler
     enabled: false
@@ -181,7 +192,7 @@ colanode:
     # ───────────────────────────────────────────────────────────────
     # Redis/Valkey Configuration
     # ───────────────────────────────────────────────────────────────
-    REDIS_URL: "redis://:$(REDIS_PASSWORD)@{{ .Release.Name }}-redis-master:6379/0"
+    REDIS_URL: "redis://:$(REDIS_PASSWORD)@{{ .Release.Name }}-redis-primary:6379/0"
     REDIS_DB: "0"
     REDIS_JOBS_QUEUE_NAME: "jobs"
     REDIS_JOBS_QUEUE_PREFIX: "colanode"
@@ -254,6 +265,8 @@ postgresql:
 
 # Valkey (Redis) Dependency Configuration
 valkey:
+  # -- Enable Valkey deployment (dependency chart)
+  enabled: true
   # Use standalone architecture as Colanode doesn't leverage Redis clustering
   architecture: standalone
   auth:
