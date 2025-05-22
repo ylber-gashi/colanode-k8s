@@ -254,11 +254,6 @@ postgresql:
 
 # Valkey (Redis) Dependency Configuration
 valkey:
-  # -- Enable Valkey deployment (dependency chart)
-  enabled: true
-  image:
-    repository: valkey/valkey
-    tag: 8.1
   # Use standalone architecture as Colanode doesn't leverage Redis clustering
   architecture: standalone
   auth:
@@ -282,11 +277,6 @@ valkey:
 
 # MinIO Dependency Configuration
 minio:
-  # -- Enable MinIO deployment (dependency chart)
-  enabled: true
-  image:
-    repository: minio/minio
-    tag: RELEASE.2025-04-08T15-41-24Z
   auth:
     rootUser: "minioadmin"
     # -- MinIO root password. Can be provided directly or via existingSecret.

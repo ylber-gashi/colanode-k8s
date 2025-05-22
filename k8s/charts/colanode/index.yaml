@@ -3,7 +3,7 @@ entries:
   colanode:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-05-19T21:30:12.169051+02:00"
+    created: "2025-05-22T20:13:01.920334+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -20,7 +20,7 @@ entries:
       version: 16.0.10
     description: A Helm chart for Colanode - open-source & local-first collaboration
       workspace
-    digest: d915cc401c2c5149016acbc1433d0b402b74368129d772a8137621206fff3337
+    digest: a3b827cbd444f6aaf7efe3bbebed556c7cb8a6443211faf86d6904a5ef0c84be
     name: colanode
     type: application
     urls:
@@ -40,7 +40,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 2025.4.22
-    created: "2025-05-19T21:30:12.171128+02:00"
+    created: "2025-05-22T20:13:01.922506+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -82,7 +82,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 17.5.0
-    created: "2025-05-19T21:30:12.174992+02:00"
+    created: "2025-05-22T20:13:01.925509+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -129,7 +129,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 8.1.1
-    created: "2025-05-19T21:30:12.178167+02:00"
+    created: "2025-05-22T20:13:01.929208+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -155,4 +155,4 @@ entries:
     urls:
     - charts/valkey-3.0.4.tgz
     version: 3.0.4
-generated: "2025-05-19T21:30:12.158355+02:00"
+generated: "2025-05-22T20:13:01.90987+02:00"
