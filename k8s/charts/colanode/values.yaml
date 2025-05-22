@@ -287,6 +287,12 @@ valkey:
       - "valkey-server"
       - "--requirepass"
       - "$(REDIS_PASSWORD)"
+    extraEnvVars:
+      - name: REDIS_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: "{{ .Release.Name }}-redis"
+            key: "redis-password"
 
 # MinIO Dependency Configuration
 minio:
