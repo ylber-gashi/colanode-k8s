@@ -3,7 +3,32 @@ entries:
   colanode:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-05-22T22:21:16.464078+02:00"
+    created: "2025-05-22T22:23:49.700416+02:00"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.7.4
+    - alias: redis
+      condition: valkey.enabled
+      name: valkey
+      repository: https://charts.bitnami.com/bitnami
+      version: 3.0.4
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.0.10
+    description: A Helm chart for Colanode - open-source & local-first collaboration
+      workspace
+    digest: f0a1db612da2463f4afbb6d0dc583ccd80ab6c060e7e7138bff9dda2a6529a90
+    name: colanode
+    type: application
+    urls:
+    - colanode-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-05-22T22:23:49.690618+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -40,7 +65,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 2025.4.22
-    created: "2025-05-22T22:21:16.466226+02:00"
+    created: "2025-05-22T22:23:49.702395+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -82,7 +107,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 17.5.0
-    created: "2025-05-22T22:21:16.468824+02:00"
+    created: "2025-05-22T22:23:49.705532+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -129,7 +154,7 @@ entries:
       tanzuCategory: service
     apiVersion: v2
     appVersion: 8.1.1
-    created: "2025-05-22T22:21:16.471823+02:00"
+    created: "2025-05-22T22:23:49.708476+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -155,4 +180,4 @@ entries:
     urls:
     - charts/valkey-3.0.4.tgz
     version: 3.0.4
-generated: "2025-05-22T22:21:16.455726+02:00"
+generated: "2025-05-22T22:23:49.680121+02:00"
