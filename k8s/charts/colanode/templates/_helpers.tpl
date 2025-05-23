@@ -72,7 +72,7 @@ Return the PostgreSQL hostname
 Return the Redis hostname
 */}}
 {{- define "colanode.redis.hostname" -}}
-{{- printf "%s-redis-master" .Release.Name -}}
+{{- printf "%s-redis-primary" .Release.Name -}}
 {{- end }}
 
 {{/*
