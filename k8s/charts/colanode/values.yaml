@@ -192,7 +192,6 @@ colanode:
     # ───────────────────────────────────────────────────────────────
     # Redis/Valkey Configuration
     # ───────────────────────────────────────────────────────────────
-    REDIS_URL: "redis://:$(REDIS_PASSWORD)@{{ .Release.Name }}-redis-primary:6379/0"
     REDIS_DB: "0"
     REDIS_JOBS_QUEUE_NAME: "jobs"
     REDIS_JOBS_QUEUE_PREFIX: "colanode"
@@ -283,10 +282,6 @@ valkey:
     persistence:
       enabled: true
       size: 8Gi
-    command:
-      - "valkey-server"
-      - "--requirepass"
-      - "ylber123"
 
 # MinIO Dependency Configuration
 minio:
