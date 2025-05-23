@@ -278,7 +278,7 @@ redis:
     # existingSecret: ""  # Will use auto-generated secret
     # -- Key within the existing secret that holds the password
     secretKeys:
-      redisPasswordKey: "redis-password"
+      redisPasswordKey: "valkey-password"
   master:
     persistence:
       enabled: true
