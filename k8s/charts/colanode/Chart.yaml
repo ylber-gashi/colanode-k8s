@@ -14,7 +14,7 @@ dependencies:
     version: "3.0.4"
     repository: "https://charts.bitnami.com/bitnami"
     alias: redis
-    condition: valkey.enabled
+    condition: redis.enabled
   - name: minio
     version: "16.0.10"
     repository: "https://charts.bitnami.com/bitnami"
