@@ -159,9 +159,20 @@ Colanode Server Environment Variables
   value: "postgres://{{ .Values.postgresql.auth.username }}:$(POSTGRES_PASSWORD)@{{ include "colanode.postgresql.hostname" . }}:5432/{{ .Values.postgresql.auth.database }}"
 {{- if or .Values.postgresql.auth.password .Values.postgresql.auth.existingSecret }}
 - name: POSTGRES_PASSWORD
+  {{- if .Values.postgresql.auth.existingSecret }}
   {{- include "colanode.getRequiredValueOrSecret" (dict "key" "postgresql.auth.password" "value" (dict "value" .Values.postgresql.auth.password "existingSecret" .Values.postgresql.auth.existingSecret "secretKey" .Values.postgresql.auth.secretKeys.userPasswordKey )) | nindent 2 }}
+  {{- else }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}-postgresql
+      key: {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
+  {{- end }}
 {{- else }}
-  {{ fail "postgresql.auth.password or postgresql.auth.existingSecret must be set" }}
+- name: POSTGRES_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}-postgresql
+      key: {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
 {{- end }}
 # Optional PostgreSQL SSL Config would go here
 
@@ -169,12 +180,19 @@ Colanode Server Environment Variables
 # Redis/Valkey Configuration
 # ───────────────────────────────────────────────────────────────
 - name: REDIS_PASSWORD
+  {{- if .Values.valkey.auth.existingSecret }}
   {{- include "colanode.getRequiredValueOrSecret" (dict
         "key" "valkey.auth.password"
         "value" (dict
           "value"        .Values.valkey.auth.password
           "existingSecret" .Values.valkey.auth.existingSecret
           "secretKey"    .Values.valkey.auth.secretKeys.redisPasswordKey )) | nindent 2 }}
+  {{- else }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}-valkey
+      key: {{ .Values.valkey.auth.secretKeys.redisPasswordKey }}
+  {{- end }}
 - name: REDIS_URL
   value: "redis://:$(REDIS_PASSWORD)@{{ include "colanode.valkey.hostname" . }}:6379/{{ .Values.colanode.config.REDIS_DB }}"
 - name: REDIS_DB
@@ -192,9 +210,23 @@ Colanode Server Environment Variables
 - name: S3_AVATARS_ENDPOINT
   value: "http://{{ include "colanode.minio.hostname" . }}:9000"
 - name: S3_AVATARS_ACCESS_KEY
+  {{- if .Values.minio.auth.existingSecret }}
   {{- include "colanode.getRequiredValueOrSecret" (dict "key" "minio.auth.rootUser" "value" (dict "value" .Values.minio.auth.rootUser "existingSecret" .Values.minio.auth.existingSecret "secretKey" .Values.minio.auth.rootUserKey )) | nindent 2 }}
+  {{- else }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}-minio
+      key: {{ .Values.minio.auth.rootUserKey }}
+  {{- end }}
 - name: S3_AVATARS_SECRET_KEY
+  {{- if .Values.minio.auth.existingSecret }}
   {{- include "colanode.getRequiredValueOrSecret" (dict "key" "minio.auth.rootPassword" "value" (dict "value" .Values.minio.auth.rootPassword "existingSecret" .Values.minio.auth.existingSecret "secretKey" .Values.minio.auth.rootPasswordKey )) | nindent 2 }}
+  {{- else }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}-minio
+      key: {{ .Values.minio.auth.rootPasswordKey }}
+  {{- end }}
 - name: S3_AVATARS_BUCKET_NAME
   value: "colanode-avatars"
 - name: S3_AVATARS_REGION
@@ -208,9 +240,23 @@ Colanode Server Environment Variables
 - name: S3_FILES_ENDPOINT
   value: "http://{{ include "colanode.minio.hostname" . }}:9000"
 - name: S3_FILES_ACCESS_KEY
+  {{- if .Values.minio.auth.existingSecret }}
   {{- include "colanode.getRequiredValueOrSecret" (dict "key" "minio.auth.rootUser" "value" (dict "value" .Values.minio.auth.rootUser "existingSecret" .Values.minio.auth.existingSecret "secretKey" .Values.minio.auth.rootUserKey )) | nindent 2 }}
+  {{- else }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}-minio
+      key: {{ .Values.minio.auth.rootUserKey }}
+  {{- end }}
 - name: S3_FILES_SECRET_KEY
+  {{- if .Values.minio.auth.existingSecret }}
   {{- include "colanode.getRequiredValueOrSecret" (dict "key" "minio.auth.rootPassword" "value" (dict "value" .Values.minio.auth.rootPassword "existingSecret" .Values.minio.auth.existingSecret "secretKey" .Values.minio.auth.rootPasswordKey )) | nindent 2 }}
+  {{- else }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}-minio
+      key: {{ .Values.minio.auth.rootPasswordKey }}
+  {{- end }}
 - name: S3_FILES_BUCKET_NAME
   value: "colanode-files"
 - name: S3_FILES_REGION

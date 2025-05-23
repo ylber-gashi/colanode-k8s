@@ -249,11 +249,11 @@ postgresql:
 
   auth:
     username: colanode_user
-    # -- PostgreSQL password. Can be provided directly or via existingSecret.
-    password: "ylber123"
+    # -- PostgreSQL password will be auto-generated and stored in a secret
+    # password: ""  # Leave empty to auto-generate
     database: colanode_db
     # -- Name of the existing Kubernetes secret containing the PostgreSQL password
-    existingSecret: ""
+    # existingSecret: ""  # Will use auto-generated secret
     # -- Key within the existing secret that holds the password
     secretKeys:
       userPasswordKey: "postgres-password"
@@ -271,10 +271,10 @@ valkey:
   auth:
     enabled: true
     username: default
-    # -- Valkey password. Can be provided directly or via existingSecret.
-    password: "ylber123"
+    # -- Valkey password will be auto-generated and stored in a secret
+    # password: ""  # Leave empty to auto-generate
     # -- Name of the existing Kubernetes secret containing the Valkey password
-    existingSecret: ""
+    # existingSecret: ""  # Will use auto-generated secret
     # -- Key within the existing secret that holds the password
     secretKeys:
       redisPasswordKey: "redis-password"
@@ -287,10 +287,10 @@ valkey:
 minio:
   auth:
     rootUser: "minioadmin"
-    # -- MinIO root password. Can be provided directly or via existingSecret.
-    rootPassword: ""
+    # -- MinIO root password will be auto-generated and stored in a secret
+    # rootPassword: ""  # Leave empty to auto-generate
     # -- Name of the existing Kubernetes secret containing the MinIO credentials
-    existingSecret: ""
+    # existingSecret: ""  # Will use auto-generated secret
     # -- Key within the existing secret that holds the root user
     rootUserKey: "root-user"
     # -- Key within the existing secret that holds the root password
