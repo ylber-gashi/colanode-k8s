@@ -262,18 +262,19 @@ postgresql:
       enabled: true
       size: 8Gi
 
-# Valkey (Redis) Dependency Configuration
-valkey:
-  # -- Enable Valkey deployment (dependency chart)
+# Redis (Valkey) Dependency Configuration
+# Note: Uses Bitnami Redis chart as Valkey-compatible deployment
+redis:
+  # -- Enable Redis deployment (dependency chart) - deployed as Valkey-compatible
   enabled: true
-  # Use standalone architecture as Colanode doesn't leverage Redis clustering
+  # Use standalone architecture (not replicaset) as Colanode doesn't leverage Redis clustering
   architecture: standalone
   auth:
     enabled: true
     username: default
-    # -- Valkey password will be auto-generated and stored in a secret
+    # -- Redis password will be auto-generated and stored in a secret
     # password: ""  # Leave empty to auto-generate
-    # -- Name of the existing Kubernetes secret containing the Valkey password
+    # -- Name of the existing Kubernetes secret containing the Redis password
     # existingSecret: ""  # Will use auto-generated secret
     # -- Key within the existing secret that holds the password
     secretKeys:
