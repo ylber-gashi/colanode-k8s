@@ -87,7 +87,7 @@ colanode:
     initialDelaySeconds: 20
     periodSeconds: 10
     timeoutSeconds: 5
-    failureThreshold: 3
+    failureThreshold: 2
     successThreshold: 1
 
   # -- Startup probe configuration - waits for dependencies to be ready
@@ -113,6 +113,9 @@ colanode:
     SERVER_NAME: "Colanode K8s"
     SERVER_AVATAR: ""
     SERVER_MODE: "standalone"
+
+    # Debug logging (uncomment to enable verbose logs)
+    DEBUG: "colanode:*"
 
     # Account settings
     ACCOUNT_VERIFICATION_TYPE: "automatic"
