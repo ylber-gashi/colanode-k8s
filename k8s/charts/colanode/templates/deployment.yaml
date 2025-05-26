@@ -28,12 +28,8 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "colanode.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.colanode.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.colanode.securityContext | nindent 12 }}
           image: "{{ .Values.colanode.image.repository }}:{{ .Values.colanode.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.colanode.image.pullPolicy }}
           ports:
@@ -50,23 +46,3 @@ spec:
             {{- toYaml .Values.colanode.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.colanode.resources | nindent 12 }}
-          {{- with .Values.colanode.volumeMounts }}
-          volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-      {{- with .Values.colanode.volumes }}
-      volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.colanode.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.colanode.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.colanode.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
