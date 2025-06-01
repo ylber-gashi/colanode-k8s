@@ -185,7 +185,7 @@ postgresql:
     pullPolicy: Always
 
   auth:
-    username: colanode_user
+    username: postgres
     # password: ""  # Leave empty to auto-generate
     # existingSecret: ""  # Will use auto-generated secret
     database: colanode_db
