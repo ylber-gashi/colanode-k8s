@@ -155,13 +155,13 @@ Colanode Server Environment Variables
 # ───────────────────────────────────────────────────────────────
 # PostgreSQL Configuration
 # ───────────────────────────────────────────────────────────────
-- name: POSTGRES_URL
-  value: "postgres://{{ .Values.postgresql.auth.username }}:$(POSTGRES_PASSWORD)@{{ include "colanode.postgresql.hostname" . }}:5432/{{ .Values.postgresql.auth.database }}"
 - name: POSTGRES_PASSWORD
   valueFrom:
     secretKeyRef:
       name: {{ .Release.Name }}-postgresql
       key: postgres-password
+- name: POSTGRES_URL
+  value: "postgres://{{ .Values.postgresql.auth.username }}:$(POSTGRES_PASSWORD)@{{ include "colanode.postgresql.hostname" . }}:5432/{{ .Values.postgresql.auth.database }}"
 
 # ───────────────────────────────────────────────────────────────
 # Redis/Valkey Configuration
