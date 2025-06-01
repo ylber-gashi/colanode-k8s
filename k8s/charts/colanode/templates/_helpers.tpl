@@ -157,24 +157,11 @@ Colanode Server Environment Variables
 # ───────────────────────────────────────────────────────────────
 - name: POSTGRES_URL
   value: "postgres://{{ .Values.postgresql.auth.username }}:$(POSTGRES_PASSWORD)@{{ include "colanode.postgresql.hostname" . }}:5432/{{ .Values.postgresql.auth.database }}"
-{{- if or .Values.postgresql.auth.password .Values.postgresql.auth.existingSecret }}
-- name: POSTGRES_PASSWORD
-  {{- if .Values.postgresql.auth.existingSecret }}
-  {{- include "colanode.getRequiredValueOrSecret" (dict "key" "postgresql.auth.password" "value" (dict "value" .Values.postgresql.auth.password "existingSecret" .Values.postgresql.auth.existingSecret "secretKey" .Values.postgresql.auth.secretKeys.userPasswordKey )) | nindent 2 }}
-  {{- else }}
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Release.Name }}-postgresql
-      key: {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
-  {{- end }}
-{{- else }}
 - name: POSTGRES_PASSWORD
   valueFrom:
     secretKeyRef:
       name: {{ .Release.Name }}-postgresql
-      key: {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
-{{- end }}
-# Optional PostgreSQL SSL Config would go here
+      key: postgres-password
 
 # ───────────────────────────────────────────────────────────────
 # Redis/Valkey Configuration
